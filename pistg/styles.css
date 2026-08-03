@@ -385,6 +385,29 @@ img { display: block; max-width: 100%; }
   font-family: ui-monospace, monospace; word-break: break-all;
 }
 
+/* ===================== SINGLE CREATOR ===================== */
+.creator-card-single {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 48px;
+  padding: 32px; border-radius: var(--radius-lg);
+  border: 1px solid var(--border); background: var(--surface);
+  max-width: 480px; margin-left: auto; margin-right: auto;
+}
+.creator-avatar-single {
+  width: 96px; height: 96px; border-radius: 16px; object-fit: cover;
+  border: 2px solid color-mix(in srgb, var(--brand-500) 40%, transparent);
+}
+.creator-info-single { text-align: left; }
+.creator-info-single h3 { font-size: 1.15rem; font-weight: 600; }
+.creator-info-single h3 a { color: var(--ink); transition: color 0.2s; }
+.creator-info-single h3 a:hover { color: var(--brand-300); }
+.creator-role-single { margin: 0.25rem 0 0.75rem; color: var(--ink-muted); font-size: 0.875rem; }
+.creator-footnote {
+  margin-top: 1.5rem; text-align: center; color: var(--ink-muted); font-size: 0.9rem;
+}
+.creator-footnote a { color: var(--brand-400); transition: color 0.2s; }
+.creator-footnote a:hover { color: var(--brand-300); }
+
 /* ===================== FOOTER ===================== */
 .footer { border-top: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 40%, transparent); }
 .footer-inner {
@@ -421,7 +444,11 @@ img { display: block; max-width: 100%; }
   border-top: 1px solid var(--border);
   font-size: 0.85rem; color: var(--ink-faint);
 }
-@media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+@media (min-width: 640px) {
+  .footer-bottom { flex-direction: row; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom .ps { margin-left: auto; text-align: right; }
+}
+.footer-bottom .ps { color: var(--ink-faint); font-size: 0.8rem; }
 
 /* ===================== REVEAL ANIMATION ===================== */
 .reveal {
@@ -463,6 +490,181 @@ img { display: block; max-width: 100%; }
   .stat-strip .stat { border-bottom: 1px solid var(--border); }
   .stat-strip .stat:last-child { border-bottom: none; }
   .dash-metrics { grid-template-columns: 1fr; }
+}
+
+/* ===================== INSTALL PAGE ===================== */
+.install-page { background: var(--base); }
+
+.install-hero { position: relative; padding: 140px 0 48px; overflow: hidden; }
+@media (min-width: 768px) { .install-hero { padding: 176px 0 64px; } }
+.install-hero .container { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.install-title {
+  margin-top: 28px; font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  max-width: 640px; text-wrap: balance;
+}
+.install-subtitle {
+  margin-top: 20px; font-size: 1.075rem; color: var(--ink-muted);
+  max-width: 560px; text-wrap: balance;
+}
+
+.install-body { padding-top: 48px; }
+.install-layout { display: grid; grid-template-columns: 1fr; gap: 40px; }
+@media (min-width: 1024px) {
+  .install-layout { grid-template-columns: 220px 1fr; gap: 64px; }
+}
+
+/* ---- Table of Contents ---- */
+.install-toc {
+  position: sticky; top: 96px; align-self: start;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); padding: 20px;
+}
+.toc-eyebrow {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.18em; color: var(--ink-faint); margin-bottom: 12px;
+}
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 6px; counter-reset: none; }
+.toc-link {
+  display: block; padding: 8px 12px; border-radius: 8px;
+  font-size: 0.85rem; color: var(--ink-muted);
+  transition: background 0.2s, color 0.2s;
+}
+.toc-link:hover { background: var(--surface-raised); color: var(--ink); }
+.toc-link.is-active {
+  background: color-mix(in srgb, var(--brand-500) 12%, transparent);
+  color: var(--brand-300); font-weight: 500;
+}
+.toc-divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+/* ---- Steps ---- */
+.install-content { max-width: 720px; }
+.step { padding: 8px 0; }
+.step-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.step-number {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  background: var(--brand-500); color: #03110b;
+  font-weight: 700; font-size: 1.05rem;
+}
+.step-head h2 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
+.step p { color: var(--ink-muted); line-height: 1.65; }
+.step p + p { margin-top: 12px; }
+.step code, .install-section code, .callout code {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 0.85em; padding: 2px 7px; border-radius: 6px;
+  background: var(--surface-raised); color: var(--brand-300);
+  border: 1px solid var(--border);
+}
+
+.step-divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+/* ---- Code blocks ---- */
+.code-block {
+  margin: 20px 0; border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; background: var(--surface-raised);
+}
+.code-block-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.75rem; color: var(--ink-faint);
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--ink-muted); font-family: inherit; font-size: 0.8rem; font-weight: 500;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.copy-btn:hover { border-color: var(--brand-500); color: var(--brand-300); }
+.copy-btn.copied { border-color: var(--brand-500); color: var(--brand-400); background: color-mix(in srgb, var(--brand-500) 10%, transparent); }
+.copy-btn-inline { padding: 4px 10px; }
+.code-block pre { padding: 16px; overflow-x: auto; margin: 0; }
+.code-block code {
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  font-size: 0.875rem; color: var(--ink); background: none; border: none; padding: 0;
+  white-space: pre; line-height: 1.6;
+}
+
+/* ---- Callouts ---- */
+.callout {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px 20px; border-radius: 12px;
+  border: 1px solid var(--border); margin-top: 20px; font-size: 0.9rem;
+  line-height: 1.6; color: var(--ink-muted);
+}
+.callout svg { flex-shrink: 0; margin-top: 2px; }
+.callout-info { background: color-mix(in srgb, var(--brand-500) 6%, transparent); border-color: color-mix(in srgb, var(--brand-500) 22%, transparent); }
+.callout-info svg { color: var(--brand-400); }
+.callout-tip { background: color-mix(in srgb, var(--accent-400) 6%, transparent); border-color: color-mix(in srgb, var(--accent-400) 22%, transparent); }
+.callout-tip svg { color: var(--accent-400); }
+.callout-warning { background: color-mix(in srgb, #fbbf24 6%, transparent); border-color: color-mix(in srgb, #fbbf24 22%, transparent); }
+.callout-warning svg { color: #fbbf24; }
+.callout p { color: var(--ink-muted); }
+.callout strong { color: var(--ink); }
+
+/* ---- Credentials card ---- */
+.creds-card {
+  margin: 24px 0; border: 1px solid var(--border);
+  border-radius: var(--radius); background: var(--surface-raised); overflow: hidden;
+}
+.cred-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; flex-wrap: wrap; gap: 12px; }
+.cred-label { font-size: 0.85rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+.cred-value { display: inline-flex; align-items: center; gap: 10px; }
+.cred-value code { font-size: 1rem; color: var(--brand-300); font-weight: 600; padding: 6px 14px; }
+.cred-divider { height: 1px; background: var(--border); }
+
+/* ---- What you get ---- */
+.install-section-title { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 24px; }
+.feature-list { display: flex; flex-direction: column; gap: 20px; }
+.feature-item { display: flex; align-items: flex-start; gap: 16px; }
+.feature-item-icon {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--brand-500) 10%, transparent);
+  color: var(--brand-400);
+  border: 1px solid color-mix(in srgb, var(--brand-500) 20%, transparent);
+}
+.feature-item h3 { font-size: 1rem; font-weight: 600; }
+.feature-item p { margin-top: 4px; font-size: 0.9rem; color: var(--ink-muted); line-height: 1.6; }
+
+/* ---- Notes ---- */
+.notes-grid { display: grid; gap: 16px; }
+@media (min-width: 640px) { .notes-grid { grid-template-columns: 1fr 1fr; } }
+.note-card {
+  padding: 20px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--surface);
+}
+.note-icon {
+  width: 36px; height: 36px; border-radius: 10px; margin-bottom: 14px;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--brand-500) 10%, transparent);
+  color: var(--brand-400);
+}
+.note-card h3 { font-size: 0.95rem; font-weight: 600; }
+.note-card p { margin-top: 6px; font-size: 0.85rem; color: var(--ink-muted); line-height: 1.6; }
+
+/* ---- Install CTA ---- */
+.install-cta {
+  margin-top: 48px; padding: 40px; text-align: center;
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  background: var(--surface);
+  position: relative; overflow: hidden;
+}
+.install-cta::before {
+  content: ""; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+  width: 240px; height: 120px; border-radius: 50%; filter: blur(60px);
+  background: color-mix(in srgb, var(--brand-500) 16%, transparent);
+}
+.install-cta h2 { position: relative; font-size: 1.5rem; font-weight: 600; }
+.install-cta p { position: relative; margin-top: 8px; color: var(--ink-muted); }
+.install-cta-actions { position: relative; margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+@media (max-width: 768px) {
+  .install-toc { position: static; }
+  .step-head h2 { font-size: 1.15rem; }
+  .cred-row { flex-direction: column; align-items: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
