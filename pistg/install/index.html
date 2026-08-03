@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Install PiSTG on your Raspberry Pi — step-by-step instructions."
+    />
+    <title>Install — PiSTG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ============ NAVBAR ============ -->
+    <header id="navbar" class="navbar">
+      <nav class="nav-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </span>
+          <span class="brand-name">PiSTG</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#dashboard">Dashboard</a></li>
+          <li><a href="index.html#creators">Creator</a></li>
+          <li><a href="index.html#project">Project</a></li>
+        </ul>
+
+        <a
+          href="https://github.com/stghecker/raspberry-pi-interface-server"
+          target="_blank"
+          rel="noreferrer"
+          class="btn btn-primary nav-cta"
+          >Get Started</a
+        >
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="top" class="install-page">
+      <section class="install-hero">
+        <div class="aurora aurora-1"></div>
+        <div class="grid-bg"></div>
+
+        <div class="container">
+          <div class="badge reveal">
+            <span class="dot"></span>
+            Setup guide
+          </div>
+          <h1 class="install-title reveal">Install PiSTG on your Raspberry Pi</h1>
+          <p class="install-subtitle reveal">
+            Follow these steps to get PiSTG running on your Pi. The included start
+            script handles everything — it creates an isolated Python environment
+            and installs dependencies automatically. No manual setup headaches.
+          </p>
+        </div>
+      </section>
+
+      <section class="section install-body">
+        <div class="container install-layout">
+          <!-- sticky sidebar -->
+          <aside class="install-toc reveal">
+            <p class="toc-eyebrow">Steps</p>
+            <ol class="toc-list">
+              <li><a href="#step-1" class="toc-link is-active">1 &nbsp;Get the project</a></li>
+              <li><a href="#step-2" class="toc-link">2 &nbsp;Run the start script</a></li>
+              <li><a href="#step-3" class="toc-link">3 &nbsp;Open the dashboard</a></li>
+              <li><a href="#step-4" class="toc-link">4 &nbsp;Log in &amp; secure it</a></li>
+            </ol>
+            <div class="toc-divider"></div>
+            <p class="toc-eyebrow">Reference</p>
+            <ol class="toc-list">
+              <li><a href="#features-list" class="toc-link">What you get</a></li>
+              <li><a href="#notes" class="toc-link">Notes &amp; tips</a></li>
+            </ol>
+          </aside>
+
+          <div class="install-content">
+            <!-- ===== STEP 1 ===== -->
+            <div id="step-1" class="step reveal">
+              <div class="step-head">
+                <span class="step-number">1</span>
+                <h2>Get the project on your Pi</h2>
+              </div>
+              <p>
+                Clone the Raspberry Pi interface server repository to your Pi.
+                Make sure you have <strong>git</strong> installed — it comes
+                pre-installed on Raspberry Pi OS.
+              </p>
+              <div class="code-block">
+                <div class="code-block-bar">
+                  <span>Terminal</span>
+                  <button class="copy-btn" data-copy="git clone https://github.com/stghecker/raspberry-pi-interface-server.git">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="copy-label">Copy</span>
+                  </button>
+                </div>
+                <pre><code>git clone https://github.com/stghecker/raspberry-pi-interface-server.git</code></pre>
+              </div>
+              <p>Then move into the project folder and the <code>webserver</code> subfolder:</p>
+              <div class="code-block">
+                <div class="code-block-bar">
+                  <span>Terminal</span>
+                  <button class="copy-btn" data-copy="cd raspberry-pi-interface-server/webserver">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="copy-label">Copy</span>
+                  </button>
+                </div>
+                <pre><code>cd raspberry-pi-interface-server/webserver</code></pre>
+              </div>
+            </div>
+
+            <div class="step-divider"></div>
+
+            <!-- ===== STEP 2 ===== -->
+            <div id="step-2" class="step reveal">
+              <div class="step-head">
+                <span class="step-number">2</span>
+                <h2>Run the start script</h2>
+              </div>
+              <p>
+                PiSTG includes a start script that handles everything for you.
+                It creates an isolated Python environment (so you never hit the
+                <code>externally-managed-environment</code> error) and installs the
+                dependencies automatically.
+              </p>
+              <div class="code-block">
+                <div class="code-block-bar">
+                  <span>Terminal</span>
+                  <button class="copy-btn" data-copy="chmod +x start.sh&#10;./start.sh">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="copy-label">Copy</span>
+                  </button>
+                </div>
+                <pre><code>chmod +x start.sh
+./start.sh</code></pre>
+              </div>
+              <div class="callout callout-info">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <p>The first run takes a little longer while it sets up the environment. After that, it starts instantly every time.</p>
+              </div>
+            </div>
+
+            <div class="step-divider"></div>
+
+            <!-- ===== STEP 3 ===== -->
+            <div id="step-3" class="step reveal">
+              <div class="step-head">
+                <span class="step-number">3</span>
+                <h2>Open the dashboard</h2>
+              </div>
+              <p>
+                Once the server is running, open a browser on any device connected
+                to the same network as your Pi and go to:
+              </p>
+              <div class="code-block">
+                <div class="code-block-bar">
+                  <span>Browser</span>
+                  <button class="copy-btn" data-copy="http://<your-pi-ip>:5000">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="copy-label">Copy</span>
+                  </button>
+                </div>
+                <pre><code>http://&lt;your-pi-ip&gt;:5000</code></pre>
+              </div>
+              <div class="callout callout-tip">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <p>Not sure of your Pi's IP address? Run <code>hostname -I</code> in the terminal on your Pi.</p>
+              </div>
+            </div>
+
+            <div class="step-divider"></div>
+
+            <!-- ===== STEP 4 ===== -->
+            <div id="step-4" class="step reveal">
+              <div class="step-head">
+                <span class="step-number">4</span>
+                <h2>Log in &amp; secure it</h2>
+              </div>
+              <p>
+                The first time the server starts, a default admin account is created
+                automatically. Use these credentials to log in:
+              </p>
+
+              <div class="creds-card reveal">
+                <div class="cred-row">
+                  <span class="cred-label">Username</span>
+                  <span class="cred-value">
+                    <code>admin</code>
+                    <button class="copy-btn copy-btn-inline" data-copy="admin">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="copy-label">Copy</span>
+                    </button>
+                  </span>
+                </div>
+                <div class="cred-divider"></div>
+                <div class="cred-row">
+                  <span class="cred-label">Password</span>
+                  <span class="cred-value">
+                    <code>admin123</code>
+                    <button class="copy-btn copy-btn-inline" data-copy="admin123">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      <span class="copy-label">Copy</span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+
+              <div class="callout callout-warning">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <p>Log in and change the password right away from your profile page. Don't leave the default password on a network-connected device.</p>
+              </div>
+            </div>
+
+            <div class="step-divider"></div>
+
+            <!-- ===== WHAT YOU GET ===== -->
+            <div id="features-list" class="install-section reveal">
+              <h2 class="install-section-title">What you get</h2>
+              <div class="feature-list">
+                <div class="feature-item">
+                  <div class="feature-item-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  </div>
+                  <div>
+                    <h3>Live system info with graphs</h3>
+                    <p>CPU usage, memory, CPU temperature, disk, network traffic, and uptime — all updating in real time.</p>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-item-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                  </div>
+                  <div>
+                    <h3>Online file explorer</h3>
+                    <p>Browse, download, upload, and delete files. Admins can manage which folders each user can access.</p>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-item-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </div>
+                  <div>
+                    <h3>Multi-user with roles</h3>
+                    <p>An admin user can create users, assign folder access, change passwords, and edit profile names.</p>
+                  </div>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-item-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </div>
+                  <div>
+                    <h3>Mobile-friendly</h3>
+                    <p>Responsive layout that works great on phones and tablets, not just desktop browsers.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-divider"></div>
+
+            <!-- ===== NOTES ===== -->
+            <div id="notes" class="install-section reveal">
+              <h2 class="install-section-title">Notes &amp; tips</h2>
+              <div class="notes-grid">
+                <div class="note-card">
+                  <div class="note-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                  </div>
+                  <h3>Local database</h3>
+                  <p>User accounts and folder permissions are stored in a local SQLite database file called <code>pi_dashboard.db</code>.</p>
+                </div>
+                <div class="note-card">
+                  <div class="note-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <h3>Sandboxed files</h3>
+                  <p>The file explorer is sandboxed to the folders the admin allows for each user. Users can't reach outside their permitted folders.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== CTA ===== -->
+            <div class="install-cta reveal">
+              <h2>Ready to go?</h2>
+              <p>Jump straight to the project repository and get started.</p>
+              <div class="install-cta-actions">
+                <a
+                  href="https://github.com/stghecker/raspberry-pi-interface-server"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="btn btn-primary"
+                >
+                  Open the project
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                <a href="index.html" class="btn btn-ghost">Back to home</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <span class="brand-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </span>
+            <span class="brand-name">PiSTG</span>
+          </a>
+          <p class="footer-tag">Another Raspberry Pi Dashboard.</p>
+        </div>
+
+        <div class="footer-links">
+          <p class="footer-eyebrow">Connect</p>
+          <a href="https://github.com/stghecker/stghecker.github.io/tree/main/pistg" target="_blank" rel="noreferrer" class="footer-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            GitHub Website
+          </a>
+          <a href="https://github.com/stghecker/raspberry-pi-interface-server" target="_blank" rel="noreferrer" class="footer-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub Project
+          </a>
+          <a href="https://linktr.ee/stghecker" target="_blank" rel="noreferrer" class="footer-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Linktree
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom container">
+        <p>© <span id="year"></span> PiSTG. Open source under the MIT licence.</p>
+        <p class="footer-love">Built by STGHECKER for the Raspberry Pi community.</p>
+        <p class="ps">Some random guy i just met on mars: github.com/ellosan</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="install.js"></script>
+  </body>
+</html>
