@@ -60,13 +60,13 @@ header {
 }
 .logo-text { font-size: 18px; font-weight: 600; letter-spacing: 0.22em; }
 .logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.38em; color: #8c978d; }
-nav { display: none; gap: 32px; }
+nav { display: none; gap: 4px; padding: 4px; border: 1px solid var(--border); background: rgba(17,23,18,0.72); }
 @media (min-width: 768px) { nav { display: flex; } }
 nav a {
-  font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.18em; color: #9da79f; transition: color 0.22s;
+  padding: 10px 14px; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.16em; color: #9da79f; transition: color 0.22s, background 0.22s;
 }
-nav a:hover { color: var(--lime); }
+nav a:hover, nav a.active { background: var(--lime); color: #10140d; }
 .btn-docs {
   display: none; border: 1px solid var(--lime); padding: 12px 20px;
   font-size: 10px; font-weight: 700; text-transform: uppercase;
@@ -317,10 +317,10 @@ svg { display: block; }
       <div class="logo-sub">PAPER / PLUGIN</div>
     </div>
   </a>
-  <nav>
+  <nav class="link-tabs" aria-label="Primary links">
+    <a href="#top" class="active">Overview</a>
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
-    <a href="#jobs">Jobs</a>
   </nav>
   <a href="#commands" class="btn-docs">Read the docs</a>
   <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
@@ -328,9 +328,9 @@ svg { display: block; }
   </button>
 </header>
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#top">Overview</a>
   <a href="#features">Features</a>
   <a href="#commands">Commands</a>
-  <a href="#jobs">Jobs</a>
 </div>
 
 <main id="top">
@@ -369,7 +369,13 @@ svg { display: block; }
             </div>
             <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#b6e35a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
           </div>
-          <div class="leaderboard" id="leaderboard"></div>
+          <div class="leaderboard" id="leaderboard">
+            <div class="lb-row"><span class="lb-rank">01</span><div class="lb-head">C</div><span class="lb-name">CreeperKing</span><span class="lb-amount">$84,620</span></div>
+            <div class="lb-row"><span class="lb-rank">02</span><div class="lb-head">M</div><span class="lb-name">MossySteve</span><span class="lb-amount">$72,180</span></div>
+            <div class="lb-row"><span class="lb-rank">03</span><div class="lb-head">L</div><span class="lb-name">LumaCraft</span><span class="lb-amount">$61,940</span></div>
+            <div class="lb-row"><span class="lb-rank">04</span><div class="lb-head">N</div><span class="lb-name">NetheriteNora</span><span class="lb-amount">$48,210</span></div>
+            <div class="lb-row"><span class="lb-rank">05</span><div class="lb-head">B</div><span class="lb-name">BirchBuilder</span><span class="lb-amount">$39,880</span></div>
+          </div>
         </div>
       </div>
       <div class="hero-card-badge">
@@ -386,7 +392,11 @@ svg { display: block; }
 
   <!-- Features -->
   <section id="features" class="features">
-    <div class="features-grid" id="featuresGrid"></div>
+    <div class="features-grid" id="featuresGrid">
+      <article class="feature"><div class="feature-icon lime"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div><div class="feature-eyebrow">CORE SYSTEM</div><h2>An economy that feels alive.</h2><p>Every coin has a purpose. Build your balance, trade with confidence, and give your server a market worth mastering.</p><div class="feature-line"></div></article>
+      <article class="feature"><div class="feature-icon amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m14.5 11.5-2.5 2.5-2.5-2.5"/><line x1="12" y1="7" x2="12" y2="14"/><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div><div class="feature-eyebrow">AUCTION HOUSE</div><h2>The market is always open.</h2><p>List loot, find rare drops, and make a deal. A clear confirmation step keeps every purchase intentional.</p><div class="feature-line"></div></article>
+      <article class="feature"><div class="feature-icon blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.531 12.469 6.619 20.382a1 1 0 1 1-3-3l7.913-7.912"/><path d="M15.939 9.682 22.5 3.119a1 1 0 0 0-3-3l-6.561 6.563"/><path d="M10.439 11.561 7.5 8.621a1 1 0 0 0-3 3L7.439 14.561"/></svg></div><div class="feature-eyebrow">PLAYER JOBS</div><h2>Work toward something bigger.</h2><p>Choose a role, complete your quota, and earn a worker discount across the entire auction house.</p><div class="feature-line"></div></article>
+    </div>
   </section>
 
   <!-- Jobs -->
@@ -448,8 +458,23 @@ svg { display: block; }
           <button class="cmd-tab" data-tab="admin">Admin (OP)</button>
         </div>
         <div class="cmd-list">
-          <div class="cmd-panel active" id="panel-player"></div>
-          <div class="cmd-panel" id="panel-admin"></div>
+          <div class="cmd-panel active" id="panel-player">
+            <div class="cmd-row"><span class="cmd-num">01</span><code class="cmd-code">/pay</code><span class="cmd-desc">Open the player payment menu</span></div>
+            <div class="cmd-row"><span class="cmd-num">02</span><code class="cmd-code">/shop</code><span class="cmd-desc">Browse the auction house</span></div>
+            <div class="cmd-row"><span class="cmd-num">03</span><code class="cmd-code">/sell</code><span class="cmd-desc">Sell items for their worth</span></div>
+            <div class="cmd-row"><span class="cmd-num">04</span><code class="cmd-code">/job</code><span class="cmd-desc">Choose or view your active job</span></div>
+            <div class="cmd-row"><span class="cmd-num">05</span><code class="cmd-code">/jobsell</code><span class="cmd-desc">Hand in your job items</span></div>
+            <div class="cmd-row"><span class="cmd-num">06</span><code class="cmd-code">/moneytop</code><span class="cmd-desc">View the richest players</span></div>
+            <div class="cmd-row"><span class="cmd-num">07</span><code class="cmd-code">/jobinfo</code><span class="cmd-desc">Show your job and quota info</span></div>
+          </div>
+          <div class="cmd-panel" id="panel-admin">
+            <div class="cmd-row"><span class="cmd-num">01</span><code class="cmd-code">/ecoset</code><span class="cmd-desc">Set a player's balance</span><span class="cmd-op">OP</span></div>
+            <div class="cmd-row"><span class="cmd-num">02</span><code class="cmd-code">/ecogive</code><span class="cmd-desc">Give money without spending yours</span><span class="cmd-op">OP</span></div>
+            <div class="cmd-row"><span class="cmd-num">03</span><code class="cmd-code">/ecostg toggle</code><span class="cmd-desc">Toggle economy for a player</span><span class="cmd-op">OP</span></div>
+            <div class="cmd-row"><span class="cmd-num">04</span><code class="cmd-code">/jobcancel</code><span class="cmd-desc">Cancel a player's active job</span><span class="cmd-op">OP</span></div>
+            <div class="cmd-row"><span class="cmd-num">05</span><code class="cmd-code">/job-timer-reset</code><span class="cmd-desc">Reset a fired player's timer</span><span class="cmd-op">OP</span></div>
+            <div class="cmd-row"><span class="cmd-num">06</span><code class="cmd-code">/activejobs</code><span class="cmd-desc">View each player's job status</span><span class="cmd-op">OP</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -465,6 +490,6 @@ svg { display: block; }
   <div>Built for Paper servers</div>
 </footer>
 
-<script type="module" src="app.js"></script>
+<script type="module" src="/app.js"></script>
 </body>
 </html>
