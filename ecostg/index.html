@@ -1,1 +1,470 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ecostg — Economy & Jobs Plugin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0a0d0b;
+  --bg-card: #111712;
+  --bg-card-hover: #141d15;
+  --bg-deep: #0d120e;
+  --bg-deeper: #0b100c;
+  --lime: #b6e35a;
+  --lime-dim: #72ad2b;
+  --amber: #d8ad65;
+  --blue: #79a9b3;
+  --text: #f4f5ee;
+  --text-dim: #9ba69c;
+  --text-faint: #69756b;
+  --border: rgba(255,255,255,0.08);
+  --border-lime: rgba(182,227,90,0.2);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-width: 320px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--lime); color: #11150e; }
+a { color: inherit; text-decoration: none; }
+code { font-family: 'DM Mono', monospace; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+@media (min-width: 1024px) { .container { padding: 0 40px; } }
+
+/* Header */
+header {
+  position: relative; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1200px; margin: 0 auto; padding: 24px 24px;
+}
+@media (min-width: 1024px) { header { padding: 24px 40px; } }
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-mark {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(182,227,90,0.6);
+  background: rgba(182,227,90,0.1);
+  color: var(--lime);
+  border-radius: 2px;
+}
+.logo-text { font-size: 18px; font-weight: 600; letter-spacing: 0.22em; }
+.logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.38em; color: #8c978d; }
+nav { display: none; gap: 32px; }
+@media (min-width: 768px) { nav { display: flex; } }
+nav a {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.18em; color: #9da79f; transition: color 0.22s;
+}
+nav a:hover { color: var(--lime); }
+.btn-docs {
+  display: none; border: 1px solid var(--lime); padding: 12px 20px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: var(--lime); transition: all 0.22s;
+}
+@media (min-width: 768px) { .btn-docs { display: block; } }
+.btn-docs:hover { background: var(--lime); color: #10140d; }
+.menu-btn { display: block; background: none; border: none; color: var(--lime); cursor: pointer; }
+@media (min-width: 768px) { .menu-btn { display: none; } }
+.mobile-menu {
+  display: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg-card); padding: 20px 24px;
+}
+.mobile-menu.open { display: block; }
+@media (min-width: 768px) { .mobile-menu.open { display: none; } }
+.mobile-menu a {
+  display: block; padding: 10px 0; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: #c7d1c7;
+}
+
+/* Hero */
+.hero {
+  position: relative; max-width: 1200px; margin: 0 auto;
+  display: grid; gap: 56px; align-items: center;
+  padding: 64px 24px 96px;
+}
+@media (min-width: 1024px) {
+  .hero { grid-template-columns: 1.05fr 0.95fr; padding: 112px 40px 128px; gap: 56px; }
+}
+.hero-glow {
+  position: absolute; left: 50%; top: 64px; transform: translateX(-50%);
+  width: 480px; height: 480px; border-radius: 50%;
+  background: rgba(114,173,43,0.1); filter: blur(110px); z-index: 0;
+}
+@media (min-width: 1024px) { .hero-glow { left: 42%; } }
+.eyebrow {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 32px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.3em; color: var(--lime);
+}
+.eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--lime); }
+h1 {
+  font-size: 48px; font-weight: 500; line-height: 0.98;
+  letter-spacing: -0.05em; max-width: 600px;
+}
+@media (min-width: 640px) { h1 { font-size: 72px; } }
+@media (min-width: 1024px) { h1 { font-size: 88px; } }
+h1 .lime { color: var(--lime); }
+.hero p {
+  margin-top: 32px; max-width: 480px; font-size: 16px;
+  line-height: 1.7; color: var(--text-dim);
+}
+.hero-btns { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+@media (min-width: 640px) { .hero-btns { flex-direction: row; } }
+.btn-primary {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: var(--lime); padding: 16px 24px; font-size: 12px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em;
+  color: #10140d; transition: transform 0.22s;
+}
+.btn-primary:hover { transform: translateY(-4px); }
+.btn-secondary {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  border: 1px solid rgba(255,255,255,0.15); padding: 16px 24px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.18em; color: #d6ddd3; transition: all 0.22s;
+}
+.btn-secondary:hover { border-color: rgba(182,227,90,0.7); color: var(--lime); }
+.hero-badges {
+  margin-top: 56px; display: flex; gap: 28px;
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.16em; color: var(--text-faint);
+}
+.hero-badges span { display: flex; align-items: center; gap: 8px; }
+
+/* Hero card */
+.hero-card-wrap { position: relative; z-index: 10; max-width: 470px; margin: 0 auto; }
+@media (min-width: 1024px) { .hero-card-wrap { margin-left: auto; } }
+.hero-card-frame { position: absolute; inset: -20px; border: 1px solid rgba(182,227,90,0.1); }
+.hero-card {
+  position: relative; border: 1px solid var(--border); background: var(--bg-card);
+  padding: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+.card-titlebar {
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border); padding: 0 12px 16px;
+}
+.card-dots { display: flex; gap: 6px; }
+.card-dots span { width: 8px; height: 8px; border-radius: 50%; }
+.card-dots span:nth-child(1) { background: var(--lime); }
+.card-dots span:nth-child(2) { background: #6f7c70; }
+.card-dots span:nth-child(3) { background: #3d493f; }
+.card-titlebar code {
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #718076;
+}
+.card-body { padding: 12px; }
+.card-wealth { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; }
+.card-wealth-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; color: #8f9a91; }
+.card-wealth-value { margin-top: 8px; font-size: 30px; }
+.leaderboard { display: flex; flex-direction: column; gap: 8px; }
+.lb-row {
+  display: flex; align-items: center; gap: 12px;
+  border: 1px solid rgba(255,255,255,0.04); background: #171e18; padding: 12px;
+}
+.lb-rank { width: 16px; font-family: 'DM Mono', monospace; font-size: 10px; color: #6f7c70; }
+.lb-head {
+  width: 28px; height: 28px; display: grid; place-items: center;
+  background: #2c4325; color: var(--lime); font-size: 10px; font-weight: 700;
+}
+.lb-name { flex: 1; font-size: 12px; font-weight: 600; color: #d6ddd3; }
+.lb-amount { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--lime); }
+.hero-card-badge {
+  position: absolute; bottom: -28px; left: -28px;
+  display: flex; align-items: center; gap: 12px;
+  border: 1px solid var(--border-lime); background: #151d15; padding: 12px 16px;
+}
+.hero-card-badge-icon {
+  width: 32px; height: 32px; display: grid; place-items: center;
+  background: var(--lime); color: #11150e;
+}
+.hero-card-badge-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #7c897e; }
+.hero-card-badge-value { margin-top: 2px; font-size: 12px; font-weight: 700; color: #edf1e8; }
+.hero-card-badge-value span { font-weight: 400; color: #849085; }
+
+/* Features */
+.features {
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg-deep);
+}
+.features-grid {
+  max-width: 1200px; margin: 0 auto; display: grid; gap: 1px;
+  border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+}
+@media (min-width: 768px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+.feature {
+  padding: 40px; transition: background 0.22s;
+}
+@media (min-width: 1024px) { .feature { padding: 48px; } }
+.feature:hover { background: var(--bg-card-hover); }
+.feature-icon {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1px solid; margin-bottom: 48px;
+}
+.feature-icon.lime { border-color: rgba(182,227,90,0.3); background: rgba(182,227,90,0.1); color: var(--lime); }
+.feature-icon.amber { border-color: rgba(216,173,101,0.3); background: rgba(216,173,101,0.1); color: var(--amber); }
+.feature-icon.blue { border-color: rgba(121,169,179,0.3); background: rgba(121,169,179,0.1); color: var(--blue); }
+.feature-eyebrow { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.28em; color: #849186; }
+.feature h2 { margin-top: 16px; max-width: 280px; font-size: 24px; line-height: 1.2; color: #eff2ea; }
+.feature p { margin-top: 16px; font-size: 14px; line-height: 1.6; color: #859187; }
+.feature-line { margin-top: 32px; width: 32px; height: 1px; background: rgba(255,255,255,0.2); transition: all 0.22s; }
+.feature:hover .feature-line { width: 64px; background: var(--lime); }
+
+/* Jobs */
+.jobs {
+  max-width: 1200px; margin: 0 auto; display: grid; gap: 56px;
+  padding: 96px 24px;
+}
+@media (min-width: 1024px) { .jobs { grid-template-columns: 0.8fr 1.2fr; padding: 128px 40px; } }
+.jobs-left h2 { font-size: 36px; line-height: 1.05; letter-spacing: -0.04em; }
+@media (min-width: 640px) { .jobs-left h2 { font-size: 48px; } }
+.jobs-left h2 .dim { color: #89958b; }
+.jobs-left p { margin-top: 24px; max-width: 380px; font-size: 14px; line-height: 1.7; color: #859187; }
+.jobs-link {
+  margin-top: 32px; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.2em; color: var(--lime); transition: color 0.22s;
+}
+.jobs-link:hover { color: #fff; }
+.jobs-cards { display: grid; gap: 12px; }
+@media (min-width: 640px) { .jobs-cards { grid-template-columns: 1fr 1fr; } }
+.job-card { border: 1px solid var(--border); background: var(--bg-card); padding: 24px; }
+.job-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 56px; }
+.job-tag { border: 1px solid; padding: 4px 8px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; }
+.job-tag.lime { border-color: rgba(182,227,90,0.3); color: var(--lime); }
+.job-tag.muted { border-color: var(--border); color: #778379; }
+.job-card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #718076; }
+.job-card h3 { margin-top: 8px; font-size: 24px; color: #f0f3ea; }
+.job-card-row { margin-top: 20px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: #9da99f; }
+.job-progress { margin-top: 24px; height: 4px; background: #273127; }
+.job-progress-bar { height: 100%; background: var(--lime); }
+.job-progress-info { margin-top: 8px; display: flex; justify-content: space-between; font-size: 10px; color: #718076; }
+.job-card p { margin-top: 20px; font-size: 12px; line-height: 1.5; color: #89958b; }
+.job-verified { margin-top: 24px; display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--amber); }
+
+/* Commands */
+.commands { border-top: 1px solid var(--border); background: #101610; }
+.commands-inner {
+  max-width: 1200px; margin: 0 auto; display: grid; gap: 56px;
+  padding: 96px 24px;
+}
+@media (min-width: 1024px) { .commands-inner { grid-template-columns: 0.9fr 1.1fr; padding: 112px 40px; } }
+.commands-left h2 { font-size: 36px; line-height: 1.05; letter-spacing: -0.04em; }
+@media (min-width: 640px) { .commands-left h2 { font-size: 48px; } }
+.commands-left h2 .dim { color: #89958b; }
+.commands-left p { margin-top: 24px; max-width: 420px; font-size: 14px; line-height: 1.7; color: #859187; }
+.cmd-tags { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+.cmd-tag { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); padding: 8px 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #aab5aa; }
+
+.cmd-tabs { display: flex; gap: 0; margin-bottom: 0; }
+.cmd-tab {
+  padding: 12px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.15em; background: transparent; border: 1px solid var(--border);
+  border-bottom: none; color: #778379; cursor: pointer; transition: all 0.22s;
+}
+.cmd-tab.active { background: var(--bg-deeper); color: var(--lime); }
+.cmd-list { border: 1px solid var(--border); background: var(--bg-deeper); padding: 8px; }
+.cmd-panel { display: none; }
+.cmd-panel.active { display: block; }
+.cmd-row {
+  display: flex; align-items: center; gap: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04); padding: 16px;
+}
+.cmd-row:last-child { border-bottom: none; }
+.cmd-num { width: 20px; font-family: 'DM Mono', monospace; font-size: 10px; color: #536057; }
+.cmd-code { width: 200px; font-family: 'DM Mono', monospace; font-size: 14px; color: var(--lime); }
+.cmd-desc { flex: 1; font-size: 12px; color: #9da99f; }
+.cmd-op {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+  border: 1px solid rgba(216,173,101,0.3); color: var(--amber); padding: 3px 7px;
+}
+
+/* Footer */
+footer {
+  max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;
+  border-top: 1px solid var(--border); padding: 32px 24px;
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.18em; color: #657168;
+}
+@media (min-width: 640px) { footer { flex-direction: row; align-items: center; justify-content: space-between; padding: 32px 40px; } }
+.footer-brand { display: flex; align-items: center; gap: 12px; color: #a8b4a8; }
+
+/* Icons */
+svg { display: block; }
+</style>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+<body>
+
+<header>
+  <a href="#top" class="logo">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+    </div>
+    <div>
+      <div class="logo-text">ECOSTG</div>
+      <div class="logo-sub">PAPER / PLUGIN</div>
+    </div>
+  </a>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#commands">Commands</a>
+    <a href="#jobs">Jobs</a>
+  </nav>
+  <a href="#commands" class="btn-docs">Read the docs</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+    <svg id="menuIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+  </button>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Features</a>
+  <a href="#commands">Commands</a>
+  <a href="#jobs">Jobs</a>
+</div>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div style="position:relative;z-index:10">
+      <div class="eyebrow">Paper-ready economy</div>
+      <h1>Give your server<br><span class="lime">an economy</span><br>worth playing for.</h1>
+      <p>Ecostg is a complete economy and jobs system for Paper servers. Make every sale count, every job matter, and every trade feel like progress.</p>
+      <div class="hero-btns">
+        <a href="#features" class="btn-primary">Explore the system
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#commands" class="btn-secondary">View commands
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        </a>
+      </div>
+      <div class="hero-badges">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Paper 1.20+</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> No dependencies</span>
+      </div>
+    </div>
+    <div class="hero-card-wrap">
+      <div class="hero-card-frame"></div>
+      <div class="hero-card">
+        <div class="card-titlebar">
+          <div class="card-dots"><span></span><span></span><span></span></div>
+          <code>/moneytop</code>
+        </div>
+        <div class="card-body">
+          <div class="card-wealth">
+            <div>
+              <div class="card-wealth-label">Server wealth</div>
+              <div class="card-wealth-value">$ 2,481,920</div>
+            </div>
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#b6e35a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          </div>
+          <div class="leaderboard" id="leaderboard"></div>
+        </div>
+      </div>
+      <div class="hero-card-badge">
+        <div class="hero-card-badge-icon">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <div class="hero-card-badge-label">Latest sale</div>
+          <div class="hero-card-badge-value">+ $4,250 <span>Diamond pickaxe</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="features-grid" id="featuresGrid"></div>
+  </section>
+
+  <!-- Jobs -->
+  <section id="jobs" class="jobs">
+    <div class="jobs-left">
+      <div class="eyebrow">The jobs loop</div>
+      <h2>A reason to<br><span class="dim">come back.</span></h2>
+      <p>Jobs turn the everyday grind into a rhythm. Pick a profession, deliver your quota every four in-game days, and unlock a little more value from every trade.</p>
+      <a href="#commands" class="jobs-link">See the job commands
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="jobs-cards">
+      <div class="job-card">
+        <div class="job-card-top">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b6e35a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.531 12.469L6.619 20.382a1 1 0 1 1-3-3l7.913-7.912"/><path d="M15.939 9.682L22.5 3.119a1 1 0 0 0-3-3l-6.561 6.563"/><path d="M10.439 11.561L7.5 8.621a1 1 0 0 0-3 3L7.439 14.561"/><path d="M12.5 6.5L9.561 3.561a1 1 0 0 0-3 3L9.5 9.5"/></svg>
+          <span class="job-tag lime">Active</span>
+        </div>
+        <div class="job-card-label">Miner</div>
+        <h3>Deep Delver</h3>
+        <div class="job-card-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b6e35a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          64x Deepslate
+        </div>
+        <div class="job-progress"><div class="job-progress-bar" style="width:72%"></div></div>
+        <div class="job-progress-info"><span>46 / 64 delivered</span><span>2d 14h</span></div>
+      </div>
+      <div class="job-card">
+        <div class="job-card-top">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d8ad65" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="job-tag muted">Every 4 days</span>
+        </div>
+        <div class="job-card-label">Worker reward</div>
+        <h3>5% discount</h3>
+        <p>Worker-listed items carry a visible badge and a small discount at checkout.</p>
+        <div class="job-verified">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg>
+          Verified by the server
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commands -->
+  <section id="commands" class="commands">
+    <div class="commands-inner">
+      <div class="commands-left">
+        <div class="eyebrow">Built for operators</div>
+        <h2>Everything you need.<br><span class="dim">Nothing in the way.</span></h2>
+        <p>A compact command set for players and a clean set of controls for the people running the world.</p>
+        <div class="cmd-tags">
+          <span class="cmd-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Player-first</span>
+          <span class="cmd-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg> GUI native</span>
+        </div>
+      </div>
+      <div>
+        <div class="cmd-tabs">
+          <button class="cmd-tab active" data-tab="player">Player</button>
+          <button class="cmd-tab" data-tab="admin">Admin (OP)</button>
+        </div>
+        <div class="cmd-list">
+          <div class="cmd-panel active" id="panel-player"></div>
+          <div class="cmd-panel" id="panel-admin"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b6e35a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+    ECOSTG PAPER
+  </div>
+  <div>Economy / Auction house / Jobs</div>
+  <div>Built for Paper servers</div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
